@@ -11,11 +11,10 @@ const loginRateLimiter = rateLimit({
     },
     skipSuccessfulRequests: true,
     handler: (_, res) => {
+        // keep the same response structure for errors 
         res.status(429).json({
             code: Parse.Error.REQUEST_LIMIT_EXCEEDED,
-            error: {
-                message: 'Too many requests, please try again later.',
-            },
+            error: 'Too many requests, please try again later.',
         });
     },
 });
